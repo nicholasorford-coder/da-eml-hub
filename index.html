@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Digital Accelerator package registration and EML source hub.">
+  <title>Digital Accelerator Package Hub</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --surface-soft: #f5f5f5;
+      --border: #dedede;
+      --border-strong: #919191;
+      --text: #242424;
+      --text-muted: #5c5c5c;
+      --brand: #0078d4;
+      --brand-hover: #0063b1;
+      --accent: #b11f4b;
+      --accent-soft: rgba(177, 31, 75, 0.08);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .topbar-inner,
+    .hero-inner,
+    .main-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 0.625rem;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .status {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
+    }
+
+    .hero-banner {
+      width: min(1180px, calc(100% - 40px));
+      height: 220px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .brand-stripe {
+      width: min(1180px, calc(100% - 40px));
+      height: 7px;
+      display: grid;
+      grid-template-columns: 2fr 2fr 2fr;
+      margin: 0 auto;
+    }
+
+    .brand-stripe span:nth-child(1) { background: var(--brand); }
+    .brand-stripe span:nth-child(2) { background: #f59e0b; }
+    .brand-stripe span:nth-child(3) { background: var(--accent); }
+
+    .hero-inner {
+      padding: 44px 0 52px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      color: var(--brand);
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 20px;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.625rem;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button-primary {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .button-primary:hover { background: var(--brand-hover); }
+
+    .main-inner {
+      padding: 56px 0 72px;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      margin: 0 0 10px;
+      color: var(--brand);
+      font-size: 1.7rem;
+      letter-spacing: -0.02em;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--pkg, var(--brand));
+      border-radius: 0.75rem;
+      background: linear-gradient(180deg, var(--pkg-soft, #f9fbff) 0%, var(--surface) 56%);
+      box-shadow: 0 1px 2px var(--border), 0 10px 24px rgba(0, 0, 0, 0.04);
+      padding: 22px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--pkg-soft, var(--accent-soft));
+      color: var(--pkg, var(--accent));
+    }
+
+    .file-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: var(--brand);
+      font-size: 1.18rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .meta {
+      margin: 9px 0 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .card-copy {
+      margin: 0 0 18px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions .button { width: 100%; }
+    .package-btn {
+      border-color: var(--pkg, var(--brand));
+      background: var(--pkg, var(--brand));
+      color: #fff;
+    }
+    .package-btn:hover {
+      background: var(--pkg, var(--brand));
+      filter: brightness(0.95);
+    }
+
+    .package-intro {
+      --pkg: #0078d4;
+      --pkg-soft: #e9f4ff;
+    }
+    .package-unlock {
+      --pkg: #0f8f4f;
+      --pkg-soft: #e9f8ef;
+    }
+    .package-transform {
+      --pkg: #7a3ff2;
+      --pkg-soft: #f2ecff;
+    }
+    .package-frontier {
+      --pkg: #c45a00;
+      --pkg-soft: #fff1e6;
+    }
+
+    .links {
+      margin-top: 34px;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: var(--bg);
+      padding: 20px;
+    }
+
+    .links h3 {
+      margin: 0 0 10px;
+      color: var(--brand);
+      font-size: 1.05rem;
+    }
+
+    .links ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .links a {
+      color: var(--brand);
+      word-break: break-all;
+    }
+
+    footer {
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 900px) {
+      .asset-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner,
+      .hero-inner,
+      .main-inner,
+      .brand-stripe { width: min(100% - 24px, 1180px); }
+      .hero-banner {
+        width: min(100% - 24px, 1180px);
+        height: 140px;
+      }
+      .status { display: none; }
+      .hero-actions .button,
+      .actions { grid-template-columns: 1fr; }
+      h1 { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">DA</span>
+        <span>Digital Accelerator</span>
+      </div>
+      <span class="status">Registration + EML source hub</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-banner">
+      <img src="./da-header-hero.jpeg" alt="Microsoft Digital Accelerator hero banner">
+    </div>
+    <div class="brand-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Copilot and Agents</p>
+      <h1>Package registrations and EML assets in one place</h1>
+      <p class="hero-copy">
+        Use this page to register audiences into each Digital Accelerator package, or open the original EML draft source.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#packages">Explore packages</a>
+        <a class="button" href="https://aka.ms/DAIntroEmail" target="_blank" rel="noopener noreferrer">Open intro registration</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-inner" id="packages">
+    <section class="intro">
+      <h2>Digital Accelerator EML packages</h2>
+      <p>
+        Each card includes a registration link (aka.ms) and its matching SharePoint EML source. Open source links to review the underlying draft email.
+      </p>
+    </section>
+
+    <section class="asset-grid" aria-label="Available EML packages">
+      <article class="card package-intro">
+        <div class="card-top">
+          <span class="badge">Intro</span>
+          <span class="file-pill">EML source</span>
+        </div>
+        <h3>DA Customer Intro – Hero Journeys</h3>
+        <p class="meta">Audience entry point for the package journeys</p>
+        <p class="card-copy">Use this to position the full Digital Accelerator story and direct customers into the right package path.</p>
+        <div class="actions">
+          <a class="button package-btn" href="https://aka.ms/DAIntroEmail" target="_blank" rel="noopener noreferrer">Register</a>
+          <a class="button" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Customer%20Intro%20%2D%20Hero%20Journeys%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQoz1ylhzJjcRag2s7GV%2DhFmEgUDxv%5FzlSZA9bWKeJVwJNWXRw" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </article>
+
+      <article class="card package-unlock">
+        <div class="card-top">
+          <span class="badge">Unlock</span>
+          <span class="file-pill">EML source</span>
+        </div>
+        <h3>DA Unlock Package – End Users</h3>
+        <p class="meta">Foundational enablement package</p>
+        <p class="card-copy">Use for broad end-user readiness and foundational Copilot capability uplift across teams.</p>
+        <div class="actions">
+          <a class="button package-btn" href="https://aka.ms/DAUnlockPackage" target="_blank" rel="noopener noreferrer">Register</a>
+          <a class="button" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Unlock%20Package%20%2D%20End%20Users%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQrZ%2D6D2IQZvSLIbxkdChK55EgUDfKKA%5F7OyQHAcJyRJp4rIKg" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </article>
+
+      <article class="card package-transform">
+        <div class="card-top">
+          <span class="badge">Transform</span>
+          <span class="file-pill">EML source</span>
+        </div>
+        <h3>DA Transform Package – End Users</h3>
+        <p class="meta">Adoption acceleration package</p>
+        <p class="card-copy">Use to drive deeper behaviour change with role-relevant scenarios and stronger day-to-day impact.</p>
+        <div class="actions">
+          <a class="button package-btn" href="https://aka.ms/DATransformPackage" target="_blank" rel="noopener noreferrer">Register</a>
+          <a class="button" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Transform%20Package%20%2D%20End%20Users%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQrOVy6Fc4B9SrPFcPMHjp9JEgUDSi6LFSAwHpXzrJlltQ8v9w" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </article>
+
+      <article class="card package-frontier">
+        <div class="card-top">
+          <span class="badge">Frontier</span>
+          <span class="file-pill">EML source</span>
+        </div>
+        <h3>DA Frontier Package – End Users</h3>
+        <p class="meta">Advanced package for next-level outcomes</p>
+        <p class="card-copy">Use for customers ready to extend into higher-complexity Copilot and Agent ways of working.</p>
+        <div class="actions">
+          <a class="button package-btn" href="https://aka.ms/DAFrontierPackage" target="_blank" rel="noopener noreferrer">Register</a>
+          <a class="button" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Frontier%20Package%20%2D%20End%20Users%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQqMbd%2DkDeVeQKndTCsFqesUEgUDbbQg9Fbydmh8XpZsQrR1%2Dg" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="links" aria-label="Quick link list">
+      <h3>Quick link list</h3>
+      <ul>
+        <li>Intro register: <a href="https://aka.ms/DAIntroEmail" target="_blank" rel="noopener noreferrer">https://aka.ms/DAIntroEmail</a></li>
+        <li>Unlock register: <a href="https://aka.ms/DAUnlockPackage" target="_blank" rel="noopener noreferrer">https://aka.ms/DAUnlockPackage</a></li>
+        <li>Transform register: <a href="https://aka.ms/DATransformPackage" target="_blank" rel="noopener noreferrer">https://aka.ms/DATransformPackage</a></li>
+        <li>Frontier register: <a href="https://aka.ms/DAFrontierPackage" target="_blank" rel="noopener noreferrer">https://aka.ms/DAFrontierPackage</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Digital Accelerator package hub. Review and personalise EML content before sharing.
+  </footer>
+</body>
+</html>
