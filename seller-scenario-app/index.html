@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Digital Accelerator seller scenario guide for selecting the right EML approach.">
+  <title>Digital Accelerator Seller Scenario Guide</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --surface-soft: #f5f5f5;
+      --border: #dedede;
+      --border-strong: #919191;
+      --text: #242424;
+      --text-muted: #5c5c5c;
+      --brand: #0078d4;
+      --brand-hover: #0063b1;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .topbar-inner,
+    .hero-inner,
+    .main-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 0.625rem;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .status {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-soft) 0%, var(--surface) 100%);
+    }
+
+    .hero-banner {
+      width: min(1180px, calc(100% - 40px));
+      height: 220px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .brand-stripe {
+      width: min(1180px, calc(100% - 40px));
+      height: 7px;
+      display: grid;
+      grid-template-columns: 2fr 2fr 2fr;
+      margin: 0 auto;
+    }
+
+    .brand-stripe span:nth-child(1) { background: #0078d4; }
+    .brand-stripe span:nth-child(2) { background: #c45a00; }
+    .brand-stripe span:nth-child(3) { background: #7030a0; }
+
+    .hero-inner { padding: 44px 0 52px; }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 0;
+      color: var(--brand);
+      font-size: clamp(2.2rem, 5.2vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy {
+      max-width: 800px;
+      margin: 22px 0 0;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 20px;
+      border: 1px solid var(--border-strong);
+      border-radius: 0.625rem;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button-primary {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .button-primary:hover { background: var(--brand-hover); }
+
+    .main-inner { padding: 52px 0 72px; }
+
+    .intro {
+      max-width: 900px;
+      margin-bottom: 26px;
+    }
+
+    .intro h2 {
+      margin: 0 0 10px;
+      color: var(--brand);
+      font-size: 1.7rem;
+      letter-spacing: -0.02em;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .matrix {
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .matrix table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .matrix th, .matrix td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.93rem;
+    }
+
+    .matrix th {
+      background: var(--surface-soft);
+      color: var(--text);
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .matrix tr:last-child td { border-bottom: none; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--pkg, var(--brand));
+      border-radius: 0.75rem;
+      background: linear-gradient(180deg, var(--pkg-soft, #f9fbff) 0%, #fff 56%);
+      box-shadow: 0 1px 2px var(--border), 0 10px 24px rgba(0, 0, 0, 0.04);
+      padding: 22px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--pkg-soft);
+      color: var(--pkg);
+    }
+
+    .card h3 {
+      margin: 0;
+      color: var(--brand);
+      font-size: 1.18rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .meta {
+      margin: 9px 0 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .card-copy {
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .signals {
+      margin: 0 0 16px;
+      padding-left: 18px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.93rem;
+    }
+
+    .signals li { margin: 0 0 3px; }
+
+    .cta-note {
+      margin: 0 0 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .package-intro { --pkg: #0f8f4f; --pkg-soft: #e9f8ef; }
+    .package-unlock { --pkg: #0078d4; --pkg-soft: #e9f4ff; }
+    .package-transform { --pkg: #c45a00; --pkg-soft: #fff1e6; }
+    .package-frontier { --pkg: #7030a0; --pkg-soft: #f3ebff; }
+
+    footer {
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: 1fr; }
+      .matrix { overflow-x: auto; }
+      .matrix table { min-width: 720px; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner,
+      .hero-inner,
+      .main-inner,
+      .brand-stripe { width: min(100% - 24px, 1180px); }
+      .hero-banner {
+        width: min(100% - 24px, 1180px);
+        height: 140px;
+      }
+      .status { display: none; }
+      .hero-actions .button { width: 100%; }
+      h1 { font-size: 2.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">DA</span>
+        <span>Digital Accelerator</span>
+      </div>
+      <span class="status">Seller scenario guide</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-banner">
+      <img src="./assets/da-header-hero.jpeg" alt="Microsoft Digital Accelerator hero banner">
+    </div>
+    <div class="brand-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Copilot and Agents</p>
+      <h1>Choose the right seller approach and EML for each customer scenario</h1>
+      <p class="hero-copy">
+        Use this guide to match customer context to the right Digital Accelerator storyline, then download the ready-to-send EML.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#scenarios">Explore scenarios</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-inner" id="scenarios">
+    <section class="intro">
+      <h2>How to use this seller guide</h2>
+      <p>
+        Start with the scenario matrix, pick the closest fit, then use the matching EML. The Intro EML is your broad opener; Scenarios 1-3 are targeted follow-on approaches.
+      </p>
+    </section>
+
+    <section class="matrix" aria-label="Scenario selection matrix">
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Use when</th>
+            <th>Primary package storyline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Intro</strong></td>
+            <td>Broad outbound to all customer contacts.</td>
+            <td>Unlock + Transform + Frontier, plus AI adoption lead journeys.</td>
+          </tr>
+          <tr>
+            <td><strong>Scenario 1</strong></td>
+            <td>New Copilot opps, new sales, recent sales, low MAU, or new adoption plan needed.</td>
+            <td>Unlock package for new user adoption.</td>
+          </tr>
+          <tr>
+            <td><strong>Scenario 2</strong></td>
+            <td>Existing Copilot accounts, renewals, low PRU, or upskilling existing users.</td>
+            <td>Transform package for maximising value.</td>
+          </tr>
+          <tr>
+            <td><strong>Scenario 3</strong></td>
+            <td>Accounts exploring Cowork, Code, Autopilot, FinOps, and advanced operating models.</td>
+            <td>Frontier package plus Agentic FinOps journeys.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="cards" aria-label="Scenario cards">
+      <article class="card package-intro">
+        <div class="card-top">
+          <span class="badge">Intro</span>
+        </div>
+        <h3>Digital Accelerator Intro EML</h3>
+        <p class="meta">Broad account entry point</p>
+        <p class="card-copy">Introduces Digital Accelerator: Unlock, Transform, and Frontier packages, plus two journeys for AI adoption leads. Live, expert-led sessions run every month, with no limit on numbers.</p>
+        <ul class="signals">
+          <li>Use for broad customer outreach.</li>
+          <li>Works as a first-touch campaign.</li>
+          <li>Covers the full portfolio in one message.</li>
+        </ul>
+        <p class="cta-note">CTA: Send it to every customer contact. It is ready to go — just add their first name.</p>
+        <a class="button button-primary" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Customer%20Intro%20%2D%20Hero%20Journeys%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQoz1ylhzJjcRag2s7GV%2DhFmEgUDxv%5FzlSZA9bWKeJVwJNWXRw" target="_blank" rel="noopener noreferrer">Download EML</a>
+      </article>
+
+      <article class="card package-unlock">
+        <div class="card-top">
+          <span class="badge">Scenario 1</span>
+        </div>
+        <h3>New to Copilot</h3>
+        <p class="meta">Unlock storyline</p>
+        <p class="card-copy">For accounts buying Copilot licenses and needing a new user adoption plan. Also suitable for new Copilot opportunities, recent sales, and low MAU.</p>
+        <ul class="signals">
+          <li>New sale or net-new Copilot motion.</li>
+          <li>Low MAU and weak first-wave usage.</li>
+          <li>Need to establish a practical adoption rhythm.</li>
+        </ul>
+        <p class="cta-note">Storyline: Promote the Unlock package for foundational new-user adoption.</p>
+        <a class="button button-primary" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Scenario%201%20%2D%20New%20to%20Copilot%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQpQk7qdICnWTLKz93srvVUaEgUDA8I01qNczJMTRhgKU1W5fg" target="_blank" rel="noopener noreferrer">Download EML</a>
+      </article>
+
+      <article class="card package-transform">
+        <div class="card-top">
+          <span class="badge">Scenario 2</span>
+        </div>
+        <h3>Existing Copilot Accounts</h3>
+        <p class="meta">Transform storyline</p>
+        <p class="card-copy">For existing Copilot customers, especially renewal contexts, low PRU, or accounts looking to upskill their current user base.</p>
+        <ul class="signals">
+          <li>Renewal cycle and value-risk signals.</li>
+          <li>Low PRU despite active licensing.</li>
+          <li>Need to move from baseline use to measurable value.</li>
+        </ul>
+        <p class="cta-note">Storyline: Promote the Transform package to maximise value from existing adoption.</p>
+        <a class="button button-primary" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Scenario%202%20%2D%20Existing%20Copilot%20Accounts%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQo%5FGnFOq35%5FQqgCqtE5a%5FIZEgUDoq462HWthemhvoA8kp5O5Q" target="_blank" rel="noopener noreferrer">Download EML</a>
+      </article>
+
+      <article class="card package-frontier">
+        <div class="card-top">
+          <span class="badge">Scenario 3</span>
+        </div>
+        <h3>Cowork, Code, and Autopilot Expansion</h3>
+        <p class="meta">Frontier + Agentic FinOps storyline</p>
+        <p class="card-copy">For accounts exploring Cowork, FinOps, Code, and Autopilot capabilities, and looking to move into advanced, agentic operating patterns.</p>
+        <ul class="signals">
+          <li>Interest in Cowork/Code/Autopilot scenarios.</li>
+          <li>Need for advanced cross-function productivity patterns.</li>
+          <li>FinOps and governance conversations are active.</li>
+        </ul>
+        <p class="cta-note">Storyline: Promote the Frontier package and Agentic FinOps journeys.</p>
+        <a class="button button-primary" href="https://how2demos-my.sharepoint.com/:u:/r/personal/nickorford_how2demos_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML%2FDA%20Scenario%203%20%2D%20Cowork%2C%20Code%2C%20Autopilot%20%28DRAFT%29%2Eeml&parent=%2Fpersonal%2Fnickorford%5Fhow2demos%5Fcom%2FDocuments%2FDA%20Asia%2FPackage%20EML&share=cQocMR6Hk9gyS7%2DqEBsNvjFrEgUD5vtTkOq2jiPqsPMLT%2Dqtpg" target="_blank" rel="noopener noreferrer">Download EML</a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    Digital Accelerator seller scenario guide. Select the scenario, then download and personalise the matching EML before sending.
+  </footer>
+</body>
+</html>
